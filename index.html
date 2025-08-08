@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+  <script defer>
+    let vk = 'virtualKeyboard' in navigator;
+    let x = 0, y = 0, width = 0, height = 1;
+  
+    if (vk){navigator.virtualKeyboard.overlaysContent = true; navigator.virtualKeyboard.addEventListener('geometrychange', (event) => {({ x, y, width, height } = event.target.boundingRect);});}
+    let r = 0, q = [];
+    document.addEventListener('DOMContentLoaded', () => { r = 1; q.forEach(f => f()); q = [] });
+    window.odr = f => r ? f() : q.push(f);
+    window.odrx = f => null;
+    odr(() => {const sendBtn = document.getElementById('chat-typingbox-send');sendBtn.ontouchend = (e) => {e.preventDefault();if (!height && vk) {sendBtn.focus()}; sendBtn.dispatchEvent(new Event('click'))};});
+
+    odr(()=>{const chatBox = document.getElementById('chat-messages'); 
+    let chatBoxHeight = null, chatBoxScrollHeight = null, chatBoxScrollTop = null; 
+    chatBox.addEventListener('scroll',() => {chatBoxScrollTop = chatBox.scrollTop})
+    new ResizeObserver(entries => {for (const entry of entries) {const actScrollHeight = chatBox.scrollHeight - chatBox.clientHeight, diff = chatBoxHeight - chatBox.clientHeight, hidden = actScrollHeight - Math.round(chatBox.scrollTop);if (chatBoxHeight) {if (0 > diff && hidden <= 2){chatBox.scrollTop = chatBoxScrollTop - Math.abs(diff)}else {chatBox.scrollTop = Math.min(chatBox.scrollTop + diff, actScrollHeight)}};chatBoxHeight = chatBox.clientHeight;chatBoxScrollHeight = actScrollHeight}}).observe(chatBox)})
+    odr(() => {const chatInput = document.getElementById('chat-typingbox-input');chatInput.addEventListener('input', () => {chatInput.style.height = 'auto';chatInput.style.height = chatInput.scrollHeight + 'px'; chatInput.selectionStart === chatInput.value.length ? chatInput.scrollTop = chatInput.scrollHeight : null});})
+  </script>
+  <link rel="stylesheet" href="res/layout.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="res/style.css" type="text/css" media="all" />
+   <script src="res/app.js" defer></script>
+  <title>Sync</title>
+</head>
+<body>
+  <div class="header">
+    <div class="gap"></div>
+    <div class="menu"><span></span><span></span><span></span></div>
+    <div class="gap"></div>
+    <div class="title"><img class="logo" src="icons/logo.png" alt="Flowline" style=" height:1rem; width: auto;"/></div>
+    <div class="profile">
+      <img src="https://i.ibb.co/Kz9XFs02/cat.jpg" alt="avatar" id="avatar" class="avatar" loading="lazy" style="height: 3rem;width: 3rem; padding: 3px; border-radius: 50%; box-sizing: border-box;">
+      <div class="profile-menu hidden" id="profile-menu">
+        <ul id="non-user-profile-menu">
+            <li><a href="/login.html">Login</a></li>
+        </ul>
+        <ul id="user-profile-menu">
+          <span id="menu-name"></span>
+          <li><a href="/api/logout">logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="gap"></div>
+  </div>
+  <div class="video">
+    <video id="video" src="vid.mp4" muted autoplay loop>N</video>
+  </div>
+  <div class="tabs">
+    <div class="switches">
+      <div id="switch-chat" class="switch">chat</div>
+      <div id="switch-setup" class="switch">setup</div>
+    </div>
+    <div class="tab">
+      <div class="tab-chat" id="tab-chat">
+        <div id="chat-messages-container" class="chat-messages-container">
+          <div class="chat-messages" id="chat-messages"></div>
+        </div>
+        <div id="chat-typingbox" class="chat-typingbox">
+          <textarea name="chat" id="chat-typingbox-input" class="chat-typingbox-input" rows="1" placeholder="Message"></textarea>
+          <button class="chat-typingbox-send" id="chat-typingbox-send"><img src="icons/send-btn.svg" alt="send" id="send-btn-img"/></button>
+        </div>
+      </div>
+      <div id="tab-setup" class="tab-setup">
+        <div class="tab-setup-container">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+<script type="text/javascript" charset="utf-8">
+  const chatBox = document.getElementById('chat-messages');
+  const sendBtn = document.getElementById('chat-typingbox-send')
+  const input = document.getElementById('chat-typingbox-input')
+  
+  for (let i = 1; i <= 50; i++) {
+    const msg = document.createElement('div');
+    msg.textContent = `Message #${i}`;
+    msg.classList.add('message')
+    chatBox.appendChild(msg);
+  }
+  
+  sendBtn.onclick = () => {
+    const val = input.value.trim()
+    if (!val) return;
+    const msg = document.createElement('div');
+    msg.textContent = val
+    msg.classList.add('message','mymsg')
+    chatBox.appendChild(msg);
+    input.value = ''
+    chatBox.scrollTop = chatBox.scrollHeight
+  }
+  
+</script> 
+
+</body>
+
+</html>

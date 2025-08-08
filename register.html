@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[var(--color-bg)] text-[var(--color-text)]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --color-bg: #f0f2f7;
+      --color-text: #2e294e;
+      --color-primary: #8093f1;
+      --color-accent: #b388eb;
+      --color-highlight: #b4ebca;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+  <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md border border-[var(--color-accent)]">
+    <h1 class="text-2xl font-semibold text-center text-[var(--color-text)] mb-6">Register</h1>
+
+    <form id="registerForm" class="flex flex-col gap-4">
+      <input type="text" name="name" id="name" placeholder="Full Name" class="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" required />
+      
+      <input type="text" name="username" id="username" placeholder="Username" class="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" required />
+
+      <input type="password" name="password" id="password" placeholder="Password" class="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" required />
+
+      <p id="errorMsg" class="text-red-500 text-sm hidden"></p>
+
+      <button type="submit" class="mt-2 bg-[var(--color-primary)] text-white p-3 rounded-lg hover:bg-[var(--color-accent)] transition-all">
+        Create Account
+      </button>
+    </form>
+
+    <p class="text-sm text-center mt-4">
+      Already have an account? 
+      <a href="/login.html" class="text-[var(--color-accent)] hover:underline">Login</a>
+    </p>
+  </div>
+
+  <script type="module" src="/res/register.js"></script>
+</body>
+</html>

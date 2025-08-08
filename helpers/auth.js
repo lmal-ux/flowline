@@ -8,10 +8,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key';
 const TOKEN_EXPIRY_SECONDS = 60 * 60 * 24 * 30; // 30 days
 
 
-export function createToken({ userId, username }) {
-  return jwt.sign({ userId, username }, JWT_SECRET, {
-    expiresIn: TOKEN_EXPIRY_SECONDS,
-  });
+export function createToken({ userId, username, userName }) {
+  return jwt.sign(
+    { userId, username, userName },
+    JWT_SECRET,
+    { expiresIn: TOKEN_EXPIRY_SECONDS }
+  );
 }
 
 export function verifyToken(token) {

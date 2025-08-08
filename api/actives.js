@@ -1,5 +1,5 @@
 // /api/actives.js
-import getDb from '../helpers/db.js';
+import getDb from '../db.js';
 import { allowed } from '../helpers/auth.js';
 import updateLastSeen from '../helpers/lastSeen.js';
 
