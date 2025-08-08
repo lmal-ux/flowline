@@ -1,7 +1,7 @@
 // helpers/updateLastSeen.js
 import getDb from '../db.js';
 
-export default async function UpdateLastSeen(userId, name) {
+export default async function updateLastSeen(userId, name) {
   const db = await getDb();
   const actives = db.collection('actives');
 
