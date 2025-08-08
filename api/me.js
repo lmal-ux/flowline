@@ -1,7 +1,7 @@
 // /api/me.js
 import getDb from '../db.js';
 import { allowed } from '../helpers/auth.js';
-import updateLastSeen from '../helpers/updateLastSeen.js';
+import updateLastSeen from '../helpers/lastSeen.js';
 
 export default async function handler(req, res) {
   if (!allowed(req)) {
